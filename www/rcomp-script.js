@@ -49,9 +49,10 @@ function getNextMessage() {
     request.send();
 }
 
-function postMessage() {
+function postMessage(wall) {
+	hints.innerHTML="";
 	
-	wallName=arguments[0];
+	wallName=wall.value;
 	
 	if(wallName == ""){
 		hints.innerHTML="No wall set";
@@ -72,7 +73,7 @@ function postMessage() {
 	
 
 function deleteMessage(){
-	var hints.innerHTML="";
+	hints.innerHTML="";
 	
 	if(numberBox.match(/^[0-9]+$/) != null){
 		messageNumber=numberBox;
