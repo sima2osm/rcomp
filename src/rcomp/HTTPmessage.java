@@ -192,17 +192,19 @@ public class HTTPmessage {
         content = c.getBytes();
         contentType = ct;
     }
-    
+
     public void setContentFromStringArray(ArrayList<String> ac, String ct) {
         String cont = "";
-        if (ac.size() > 0) {
-            for (String s : ac) {
-                cont += s;
-                cont += "\n";
+        if (ac != null) {
+            if (ac.size() > 0) {
+                for (String s : ac) {
+                    cont += s;
+                    cont += "\n";
+                }
             }
-        }
-        if (cont.length() > 0) {
-            setContentFromString(cont, ct);
+            if (cont.length() > 0) {
+                setContentFromString(cont, ct);
+            }
         }
     }
 
