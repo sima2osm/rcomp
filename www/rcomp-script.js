@@ -50,7 +50,6 @@ function getNextMessage() {
 }
 
 function postMessage() {
-    var hints.innerHTML="";
 	
 	wallName=arguments[0];
 	
