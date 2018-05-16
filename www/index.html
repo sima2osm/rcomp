@@ -1,0 +1,31 @@
+<html><head><title>HTTP SERVER</title>
+<script src="rcomp-script.js"></script>
+</head>
+<body onload="loadAndStart()">
+<h1>HTTP SERVER  - Aplication</h1>
+<h3>Java version</h3>
+<br>
+<br>
+<hr>
+<tr><td colspan="2">Wall: 
+<input type="text" id="wall" size="10"><input type="button" value="Set Wall" onclick="setWall()">
+<br>
+<span id="currentWall">No wall selected</span>
+<hr>
+<textarea id="messages" rows="20" cols="160" readonly>
+No messages 
+</textarea>
+</td></tr>
+<hr>
+<tr><td colspan="2">Text message:    
+<input type="text" id="message" size="100"><input type="button" value="Send" onclick="postMessage()">
+<hr>
+<tr><td colspan="2">Message number:    
+<input type="text" id="number_message_delete" size="5"><input type="button" value="Delete Message" onclick="deleteMessage()">
+<br>
+<br>
+<input type="button" value="Delete current wall" onclick="deleteWall()">
+
+</td></tr></table>
+</body></html>
+
