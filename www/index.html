@@ -12,20 +12,36 @@
 <br>
 <span id="currentWall">No wall selected</span>
 <hr>
+
 <textarea id="messages" rows="20" cols="160" readonly>
 No messages 
 </textarea>
 </td></tr>
 <hr>
 <tr><td colspan="2">Text message:    
-<input type="text" id="message" size="100"><input type="button" value="Send" onclick="postMessage()">
+<input type="text" id="message" size="100"><input type="button" value="Send" onclick="postMessage(wallName)">
 <hr>
 <tr><td colspan="2">Message number:    
 <input type="text" id="number_message_delete" size="5"><input type="button" value="Delete Message" onclick="deleteMessage()">
+</td></tr>
 <br>
 <br>
+<script>
+function setWall(){
+	var wallBox = document.getElementById("wall");
+	
+	var wallName=wallBox.value;
+	
+	if(Boolean(wallName)){
+		document.getElementById("currentWall").innerHTML = wallName;
+		nextMsg=0;	
+	}else{
+		document.getElementById("currentWall").innerHTML = "Wall name can't be empty.";
+        return;
+	}
+		
+}
+</script>
 <input type="button" value="Delete current wall" onclick="deleteWall()">
-
-</td></tr></table>
 </body></html>
 
