@@ -22,7 +22,7 @@ function getNextMessage() {
 		mArea.value = "";
         	mArea.style.color="blue";
 	}
-        mArea.value = mArea.value + this.responseText + "\r\n";
+        mArea.value =  this.responseText + "\r\n";
         mArea.scrollTop = mArea.scrollHeight; // scroll the textarea to make last lines visible
         nextMsg=nextMsg+1; 
         setTimeout(getNextMessage, 100);
@@ -52,7 +52,7 @@ function getNextMessage() {
 }
 
 function postMessage() {
-    hints.innerHTML="";
+    var hints.innerHTML="";
 	
 	if(wallName == ""){
 		hints.innerHTML="No wall set";
@@ -72,24 +72,24 @@ function postMessage() {
     }
 	
 function setWall(){
-	hints.innerHTML="";
 	
-	if(wallBox.value == ""){
-		hints.innerHTML="Wall name can't be empty.";
+	var wallll=document.getElementById("wall");
+	wallName=wallll.value;
+	
+	if(Boolean(wallName)){
+		document.getElementById("currentWall").innerHTML = wallName;
+		nextMsg=0;	
+	}else{
+		document.getElementById("currentWall").innerHTML = "Wall name can't be empty.";
         return;
 	}
 		
-	wallName = wallBox;
-	
-	document.getElementById("currentWall").innerHTML = wallName;
-	
-	nextMsg=0;
-	
 }
 
 
+
 function deleteMessage(){
-	hints.innerHTML="";
+	var hints.innerHTML="";
 	
 	if(numberBox.match(/^[0-9]+$/) != null){
 		messageNumber=numberBox;
@@ -103,7 +103,7 @@ function deleteMessage(){
 	nextMsg=nextMsg-1;
 	DELETErequest.timeout = 5000;
     DELETErequest.send();
-    }
+    
 	
 }
 
