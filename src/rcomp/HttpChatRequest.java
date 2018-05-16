@@ -35,6 +35,7 @@ public class HttpChatRequest extends Thread {
             response.setResponseStatus("200 Ok");
 
             if (request.getMethod().equals("GET")) {
+                int numMsgs = 0;
                 if (request.getURI().startsWith("/walls/")) {
                     String wallName = request.getURI().substring(7);
                     if (wallName.equals("") || wallName.contains("/")) {
@@ -43,7 +44,7 @@ public class HttpChatRequest extends Thread {
                                 "text/html");
                         response.setResponseStatus("405 Method Not Allowed");
                     } else {
-                        ArrayList<String> msgs = HttpServerChat.getMsgs(wallName);
+                        ArrayList<String> msgs = HttpServerChat.getMsg(wallName);
                         // if msgNum doesn't yet exist, the getMsg() method waits
                         // until it does. So the HTTP request was received, but the
                         // HTTP response is sent only when there's a message
