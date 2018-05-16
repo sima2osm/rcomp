@@ -1,14 +1,12 @@
-
 // global variables
 var nextMsg;
 var isWall=0;
 var  finalMessage;
-var mArea,wallBox, messageBox, hints, numberBox ,wallName, messageNumber; // defined only after the document is loaded
+var mArea, messageBox, hints, numberBox ,wallName, messageNumber; // defined only after the document is loaded
 
 function loadAndStart() {
     mArea=document.getElementById("messages");
     messageBox=document.getElementById("message");
-	wallBox=document.getElementById("wall");
 	numberBox=document.getElementById("number_message_delete");
     hints=document.getElementById("hints");
     setTimeout(getNextMessage, 1000);
@@ -22,7 +20,7 @@ function getNextMessage() {
 		mArea.value = "";
         	mArea.style.color="blue";
 	}
-        mArea.value =  this.responseText + "\r\n";
+        mArea.value = this.responseText + "\r\n";
         mArea.scrollTop = mArea.scrollHeight; // scroll the textarea to make last lines visible
         nextMsg=nextMsg+1; 
         setTimeout(getNextMessage, 100);
@@ -54,6 +52,8 @@ function getNextMessage() {
 function postMessage() {
     var hints.innerHTML="";
 	
+	wallName=arguments[0];
+	
 	if(wallName == ""){
 		hints.innerHTML="No wall set";
 		return;
@@ -71,22 +71,6 @@ function postMessage() {
 	nextMsg=nextMsg+1;
     }
 	
-function setWall(){
-	
-	var wallll=document.getElementById("wall");
-	wallName=wallll.value;
-	
-	if(Boolean(wallName)){
-		document.getElementById("currentWall").innerHTML = wallName;
-		nextMsg=0;	
-	}else{
-		document.getElementById("currentWall").innerHTML = "Wall name can't be empty.";
-        return;
-	}
-		
-}
-
-
 
 function deleteMessage(){
 	var hints.innerHTML="";
