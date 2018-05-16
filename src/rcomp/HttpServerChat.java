@@ -41,7 +41,7 @@ public class HttpServerChat {
     private static final ArrayList<String> MSG_LIST = new ArrayList<>();
     private static final HashMap<String, ArrayList<String>> WALL_LIST = new HashMap<>();
 
-    public static ArrayList<String> getMsgs(String wallName) {
+    public static ArrayList<String> getMsg(String wallName) {
         synchronized (WALL_LIST) {
             for (Entry<String, ArrayList<String>> e : WALL_LIST.entrySet()) {
                 if (e.getKey().equals(wallName)) {
@@ -49,7 +49,7 @@ public class HttpServerChat {
                 }
             }
             WALL_LIST.notifyAll();
-            return new ArrayList<>();
+            return null;
         }
     }
 

@@ -195,12 +195,15 @@ public class HTTPmessage {
     
     public void setContentFromStringArray(ArrayList<String> ac, String ct) {
         String cont = "";
-        for (String s : ac) {
-            cont += s;
-            cont += "\n";
+        if (ac.size() > 0) {
+            for (String s : ac) {
+                cont += s;
+                cont += "\n";
+            }
         }
-        cont = cont.substring(0, cont.length() - 1);
-        setContentFromString(cont, ct);
+        if (cont.length() > 0) {
+            setContentFromString(cont, ct);
+        }
     }
 
     public boolean setContentFromFile(String fname) {
