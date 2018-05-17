@@ -2,7 +2,7 @@
 var nextMsg;
 var isWall=0;
 var  finalMessage;
-var mArea, messageBox,/* hints*/, numberBox ,wallName, messageNumber; // defined only after the document is loaded
+var mArea, messageBox/*, hints*/, numberBox ,wallName, messageNumber; // defined only after the document is loaded
 
 function loadAndStart() {
     mArea=document.getElementById("messages");
@@ -21,8 +21,7 @@ function getNextMessage() {
         	mArea.style.color="blue";
 	}
         mArea.value = this.responseText + "\r\n";
-        mArea.scrollTop = mArea.scrollHeight; // scroll the textarea to make last lines visible
-        nextMsg=nextMsg+1; 
+        /*nextMsg=nextMsg+1;*/ 
         setTimeout(getNextMessage, 100);
         };
 
@@ -64,12 +63,13 @@ function postMessage(wall) {
         }
     var POSTrequest = new XMLHttpRequest();
     //wallBox.disabled=true;
-    POSTrequest.open("POST", "/walls/"+wallName, true);
+    POSTrequest.open("POST", "/walls/" + wallName, true);
     POSTrequest.timeout = 5000;
 	var nextMsg_string = nextMsg.toString();
 	var final_message = nextMsg_string.concat(' - ',messageBox.value);
     POSTrequest.send(final_message);
 	nextMsg=nextMsg+1;
+    mArea.scrollTop = mArea.scrollHeight; // scroll the textarea to make last lines visible
     }
 	
 
@@ -85,7 +85,7 @@ function deleteMessage(){
 	
 	var DELETErequest = new XMLHttpRequest();
 	DELETErequest.open("DELETE", "/walls/"+wallName+"/"+messageNumber, true);
-	nextMsg=nextMsg-1;
+	/*nextMsg=nextMsg-1;*/
 	DELETErequest.timeout = 5000;
     DELETErequest.send();
     
@@ -95,7 +95,7 @@ function deleteMessage(){
 function deleteWall(){
 	var DELETErequest = new XMLHttpRequest();
 	DELETErequest.open("DELETE", "/walls/"+wallBox.value+"/"+messageNumber, true);
-	nextMsg=nextMsg-1;
+	/*nextMsg=nextMsg-1;*/
 }
 	
 
