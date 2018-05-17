@@ -2,6 +2,7 @@
 var nextMsg;
 var isWall=0;
 var  finalMessage;
+var a;
 var mArea, messageBox/*, hints*/, numberBox ,wallName, messageNumber; // defined only after the document is loaded
 
 function loadAndStart() {
@@ -9,8 +10,32 @@ function loadAndStart() {
     messageBox=document.getElementById("message");
 	numberBox=document.getElementById("number_message_delete");
     /*hints=document.getElementById("hints");*/
+	hideContent();
+	a = 0;
     setTimeout(getNextMessage, 1000);
     }
+	
+function hideContent() {
+	document.getElementById("messages").style.visibility="hidden";
+	document.getElementById("message").style.visibility="hidden";
+	document.getElementById("message_text").style.visibility="hidden";
+	document.getElementById("number_message_delete").style.visibility="hidden";
+	document.getElementById("number_text").style.visibility="hidden";
+	document.getElementById("send_button").style.visibility="hidden";
+	document.getElementById("mdel_button").style.visibility="hidden";
+	document.getElementById("wdel_button").style.visibility="hidden";
+}
+
+function showContent() {
+	document.getElementById("messages").style.visibility="visible";
+	document.getElementById("message").style.visibility="visible";
+	document.getElementById("message_text").style.visibility="visible";
+	document.getElementById("number_message_delete").style.visibility="visible";
+	document.getElementById("number_text").style.visibility="visible";
+	document.getElementById("send_button").style.visibility="visible";
+	document.getElementById("mdel_button").style.visibility="visible";
+	document.getElementById("wdel_button").style.visibility="visible";
+}
 
 function getNextMessage() {
     var request = new XMLHttpRequest();
@@ -54,10 +79,19 @@ function setWall(){
 	wallName=wallBox.value;
 	
 	if(Boolean(wallName)){
-		document.getElementById("currentWall").innerHTML = wallName;
-		nextMsg=0;	
+		document.getElementById("currentWall").innerHTML = "Current wall: ".concat(wallName);
+		nextMsg=0;
+		if (a == 0) {
+			showContent();
+			a=1;
+		}
+		
 	}else{
 		document.getElementById("currentWall").innerHTML = "Wall name can't be empty.";
+		if (a == 1) {
+			hideContent();
+			a=0;
+		}
         return;
 	}
 }
@@ -102,6 +136,16 @@ function deleteMessage(){
 function deleteWall(){
 	var DELETErequest = new XMLHttpRequest();
 	DELETErequest.open("DELETE", "/walls/"+wallName, true);
+	DELETErequest.timeout = 5000;
+    DELETErequest.send();
+	wallName="";
+	document.getElementById("currentWall").innerHTML="No wall selected";
+	document.getElementById("currentWall").innerHTML = "Wall name can't be empty.";
+		if (a == 1) {
+			hideContent();
+			a=0;
+		}
+        return;
 	/*nextMsg=nextMsg-1;*/
 	}
 	

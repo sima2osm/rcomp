@@ -2,36 +2,22 @@
 <script src="rcomp-script.js"></script>
 </head>
 <body bgcolor="#E6E6FA" onload="loadAndStart()">
-
-<img src="isep.png" height="100" width="500" align="right"></img>
+<img src="isep.png" height="100" width="300" align="right"></img>
 <h1>HTTP SERVER  - Aplication</h1>
-<br>
-<hr>
-<br>
 <p id="wall_text" >Wall:</p> 
 <input type="text" id="wall" size="10"><input type="button" value="Set Wall" onclick="setWall();getNextMessage();">
-<br>
 <span id="currentWall">No wall selected</span>
-<br>
-<br>
 <hr>
-<textarea id="messages" rows="32" cols="260" readonly>
+<textarea id="messages" rows="19" cols="175" readonly>
 No messages 
 </textarea>
 <hr>
-<br>
-<p id="wall_text" >Message:</p>    
-<input type="text" id="message" size="100"><input type="button" value="Send" onclick="postMessage(document.getElementById('wall'))">
-<br>
-<br>
+<p id="message_text" >Message:</p>    
+<input type="text" id="message" size="50"><input type="button" id="send_button" value="Send" onclick="postMessage(document.getElementById('wall'))">
 <hr>
-<br>
-<p id="wall_text" >Message number:</p>
-<input type="text" id="number_message_delete" size="5"><input type="button" value="Delete Message" onclick="deleteMessage()">
-<br>
-<br>
+<p id="number_text" >Message number:</p>
+<input type="text" id="number_message_delete" size="5"><input type="button" id="mdel_button" value="Delete Message" onclick="deleteMessage()">
 <hr>
-<br>
-<input type="button" value="Delete current wall" onclick="deleteWall()">
+<input type="button" id ="wdel_button" value="Delete current wall" onclick="deleteWall()">
 </body></html>
 

@@ -80,10 +80,11 @@ public class HttpServerChat {
         }
     }
 
-    public static void delWall(String wallName) {
+    public static boolean delWall(String wallName) {
         synchronized (WALL_LIST) {
-            WALL_LIST.remove(wallName);
+            ArrayList<String> returnable = WALL_LIST.remove(wallName);
             WALL_LIST.notifyAll();
+            return returnable != null;
         }
     }
 
