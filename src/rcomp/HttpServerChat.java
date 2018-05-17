@@ -43,14 +43,25 @@ public class HttpServerChat {
 
     public static ArrayList<String> getMsg(String wallName) {
         synchronized (WALL_LIST) {
+//            System.out.println("\n\n\n" + wallName + "\n\n\n");
             for (Entry<String, ArrayList<String>> e : WALL_LIST.entrySet()) {
                 if (e.getKey().equals(wallName)) {
-                    return e.getValue();
+                    ArrayList<String> temp = new ArrayList<>(e.getValue());
+                    ArrayList<String> returnable = insertCont(temp);
+                    return returnable;
                 }
             }
             WALL_LIST.notifyAll();
             return null;
         }
+    }
+
+    private static ArrayList<String> insertCont(ArrayList<String> al) {
+        ArrayList<String> returnable = new ArrayList<>();
+        for (int i = 0; i < al.size(); i++) {
+            returnable.add(String.format("%d - %s", i + 1, al.get(i)));
+        }
+        return returnable;
     }
 
     public static void addMsg(String wallName, String content) {

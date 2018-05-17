@@ -46,6 +46,20 @@ function getNextMessage() {
     // no timeout, for following messages, the server responds only when the requested
     // message number exists
     request.send();
+	}
+	
+function setWall(){
+	var wallBox = document.getElementById("wall");
+	
+	wallName=wallBox.value;
+	
+	if(Boolean(wallName)){
+		document.getElementById("currentWall").innerHTML = wallName;
+		nextMsg=0;	
+	}else{
+		document.getElementById("currentWall").innerHTML = "Wall name can't be empty.";
+        return;
+	}
 }
 
 function postMessage(wall) {
@@ -88,13 +102,13 @@ function deleteMessage(){
     DELETErequest.send();
     
 	
-}
+	}
 
 function deleteWall(){
 	var DELETErequest = new XMLHttpRequest();
 	DELETErequest.open("DELETE", "/walls/"+wallBox.value+"/"+messageNumber, true);
 	/*nextMsg=nextMsg-1;*/
-}
+	}
 	
 
 
