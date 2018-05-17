@@ -8,7 +8,7 @@
 <br>
 <hr>
 <tr><td colspan="2">Wall: 
-<input type="text" id="wall" size="10"><input type="button" value="Set Wall" onclick="setWall()">
+<input type="text" id="wall" size="10"><input type="button" value="Set Wall" onclick="setWall();getNextMessage()">
 <br>
 <span id="currentWall">No wall selected</span>
 <hr>
@@ -39,7 +39,6 @@ function setWall(){
 		document.getElementById("currentWall").innerHTML = "Wall name can't be empty.";
         return;
 	}
-		
 }
 </script>
 <input type="button" value="Delete current wall" onclick="deleteWall()">

@@ -65,9 +65,7 @@ function postMessage(wall) {
     //wallBox.disabled=true;
     POSTrequest.open("POST", "/walls/" + wallName, true);
     POSTrequest.timeout = 5000;
-	var nextMsg_string = nextMsg.toString();
-	var final_message = nextMsg_string.concat(' - ',messageBox.value);
-    POSTrequest.send(final_message);
+    POSTrequest.send(messageBox.value);
 	nextMsg=nextMsg+1;
     mArea.scrollTop = mArea.scrollHeight; // scroll the textarea to make last lines visible
     }
