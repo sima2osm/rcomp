@@ -5,11 +5,10 @@
 
 <img src="isep.png" height="100" width="500" align="right"></img>
 <h1>HTTP SERVER  - Aplication</h1>
-<h3>Java version</h3>
 <br>
 <hr>
 <br>
-<tr><td colspan="2">Wall: 
+<p id="wall_text" >Wall:</p> 
 <input type="text" id="wall" size="10"><input type="button" value="Set Wall" onclick="setWall();getNextMessage();">
 <br>
 <span id="currentWall">No wall selected</span>
@@ -19,18 +18,16 @@
 <textarea id="messages" rows="32" cols="260" readonly>
 No messages 
 </textarea>
-</td></tr>
 <hr>
 <br>
-<tr><td colspan="2">Text message:    
+<p id="wall_text" >Message:</p>    
 <input type="text" id="message" size="100"><input type="button" value="Send" onclick="postMessage(document.getElementById('wall'))">
 <br>
 <br>
 <hr>
 <br>
-<tr><td colspan="2">Message number:    
+<p id="wall_text" >Message number:</p>
 <input type="text" id="number_message_delete" size="5"><input type="button" value="Delete Message" onclick="deleteMessage()">
-</td></tr>
 <br>
 <br>
 <hr>
