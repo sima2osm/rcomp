@@ -2,13 +2,13 @@
 var nextMsg;
 var isWall=0;
 var  finalMessage;
-var mArea, messageBox, hints, numberBox ,wallName, messageNumber; // defined only after the document is loaded
+var mArea, messageBox,/* hints*/, numberBox ,wallName, messageNumber; // defined only after the document is loaded
 
 function loadAndStart() {
     mArea=document.getElementById("messages");
     messageBox=document.getElementById("message");
 	numberBox=document.getElementById("number_message_delete");
-    hints=document.getElementById("hints");
+    /*hints=document.getElementById("hints");*/
     setTimeout(getNextMessage, 1000);
     }
 
@@ -64,7 +64,7 @@ function postMessage(wall) {
         }
     var POSTrequest = new XMLHttpRequest();
     //wallBox.disabled=true;
-    POSTrequest.open("POST", "/walls/"+wallName+"/"+nextMsg, true);
+    POSTrequest.open("POST", "/walls/"+wallName, true);
     POSTrequest.timeout = 5000;
 	var nextMsg_string = nextMsg.toString();
 	var final_message = nextMsg_string.concat(' - ',messageBox.value);
@@ -74,12 +74,12 @@ function postMessage(wall) {
 	
 
 function deleteMessage(){
-	hints.innerHTML="";
+	/*hints.innerHTML="";*/
 	
 	if(numberBox.match(/^[0-9]+$/) != null){
 		messageNumber=numberBox;
 	}else{
-		hints.innerHTML="Number of the message must be a integer";
+		/*hints.innerHTML="Number of the message must be a integer";*/
         return;
 	}
 	
