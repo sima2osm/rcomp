@@ -50,24 +50,25 @@ function getNextMessage() {
 }
 
 function postMessage(wall) {
-	hints.innerHTML="";
 	
 	wallName=wall.value;
 	
+	
 	if(wallName == ""){
-		hints.innerHTML="No wall set";
+		messageBox.disable=true;
 		return;
 	}
 	
     if(messageBox.value === "") { 
-        hints.innerHTML="Not sending empty message.";
         return;
         }
     var POSTrequest = new XMLHttpRequest();
     //wallBox.disabled=true;
     POSTrequest.open("POST", "/walls/"+wallName+"/"+nextMsg, true);
     POSTrequest.timeout = 5000;
-    POSTrequest.send("{0} - {1}".format(nextMsg, messageBox.value));
+	var nextMsg_string = nextMsg.toString();
+	var final_message = nextMsg_string.concat(' - ',messageBox.value);
+    POSTrequest.send(final_message);
 	nextMsg=nextMsg+1;
     }
 	

@@ -40,7 +40,7 @@ public class HttpChatRequest extends Thread {
                     String wallName = request.getURI().substring(7);
                     if (wallName.equals("") || wallName.contains("/")) {
                         response.setContentFromString(
-                                "<html><body><h1>ERROR: 405 Method Not Allowed</h1></body></html>",
+                                "<html><body><h1><font color=\"red\">ERROR: 405 Method Not Allowed (Wall name cant't be empty)</font></h1></body></html>",
                                 "text/html");
                         response.setResponseStatus("405 Method Not Allowed");
                     } else {
