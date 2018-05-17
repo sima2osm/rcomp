@@ -13,7 +13,7 @@ public class HttpServerChat {
 
     static private final String BASE_FOLDER = "www";
     static private ServerSocket sock;
-    private static final int PORT = 32107;
+    private static final int PORT = 32102;
 
     public static void main(String args[]) throws Exception {
         Socket cliSock;
