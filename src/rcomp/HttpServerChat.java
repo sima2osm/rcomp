@@ -36,9 +36,6 @@ public class HttpServerChat {
         }
     }
 
-    // MESSAGES ARE ACCESSED BY THREADS - LOCKING REQUIRED
-    private static int nextMsgNum = 0;
-    private static final ArrayList<String> MSG_LIST = new ArrayList<>();
     private static final HashMap<String, ArrayList<String>> WALL_LIST = new HashMap<>();
 
     public static ArrayList<String> getMsg(String wallName) {
@@ -46,8 +43,12 @@ public class HttpServerChat {
 //            System.out.println("\n\n\n" + wallName + "\n\n\n");
             for (Entry<String, ArrayList<String>> e : WALL_LIST.entrySet()) {
                 if (e.getKey().equals(wallName)) {
+                    if (e.getValue().isEmpty()) {
+                        return null;
+                    }
                     ArrayList<String> temp = new ArrayList<>(e.getValue());
                     ArrayList<String> returnable = insertCont(temp);
+                    WALL_LIST.notifyAll();
                     return returnable;
                 }
             }
@@ -90,14 +91,13 @@ public class HttpServerChat {
         synchronized (WALL_LIST) {
             for (Entry<String, ArrayList<String>> e : WALL_LIST.entrySet()) {
                 if (e.getKey().equals(wallName)) {
-                    for (String s : e.getValue()) {
-                        String[] split = s.split(" - ");
-                        if (Integer.parseInt(split[0]) == messageNumber) {
-                            e.getValue().remove(s);
-                            break;
-                        }
+                    if (messageNumber <= e.getValue().size() && messageNumber > 0) {
+                        e.getValue().remove(messageNumber - 1);
+                        WALL_LIST.notifyAll();
+                        return;
+                    } else {
+                        break;
                     }
-                    break;
                 }
             }
             WALL_LIST.notifyAll();

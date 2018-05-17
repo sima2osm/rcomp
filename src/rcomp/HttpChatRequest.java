@@ -38,7 +38,6 @@ public class HttpChatRequest extends Thread {
                 int numMsgs = 0;
                 if (request.getURI().startsWith("/walls/")) {
                     String wallName = request.getURI().substring(7);
-//                    System.out.println(wallName);
                     if (wallName.equals("") || wallName.contains("/")) {
                         response.setContentFromString(
                                 "<html><body><h1>ERROR: 405 Method Not Allowed (Wall name cant't be empty)</h1></body></html>",
@@ -46,6 +45,7 @@ public class HttpChatRequest extends Thread {
                         response.setResponseStatus("405 Method Not Allowed");
                     } else if (wallName.equals("undefined")) {
                         response.setContentFromString("No messages", "text/plain");
+                        response.setResponseStatus("200 Ok");
                     } else {
                         ArrayList<String> msgs = HttpServerChat.getMsg(wallName);
                         // if msgNum doesn't yet exist, the getMsg() method waits
@@ -53,8 +53,10 @@ public class HttpChatRequest extends Thread {
                         // HTTP response is sent only when there's a message
                         if (msgs != null) {
                             response.setContentFromStringArray(msgs, "text/plain");
+                            response.setResponseStatus("200 Ok");
                         } else {
                             response.setContentFromString("No messages", "text/plain");
+                            response.setResponseStatus("200 Ok");
                         }
                     }
                 } else { // NOT GET /walls/ , THEN IT MUST BE A FILE
@@ -72,23 +74,18 @@ public class HttpChatRequest extends Thread {
                     }
                 }
             } else if (request.getMethod().equals("POST")) { // NOT GET, must be POST
-//                System.out.println("post");
                 if (request.getURI().startsWith("/walls/")) {
                     String wallName = request.getURI().substring(7);
                     if (wallName.equals("") || wallName.contains("/")) {
-//                        System.out.println("fdpfdpfdp");
                         response.setContentFromString(
                                 "<html><body><h1>ERROR: 405 Method Not Allowed</h1></body></html>",
                                 "text/html");
                         response.setResponseStatus("405 Method Not Allowed");
                     } else {
-//                        String a = request.getContentAsString();
-//                        System.out.printf("\n\n\n%s\n\n\n", a);
                         HttpServerChat.addMsg(wallName, request.getContentAsString());
                         response.setResponseStatus("200 Ok");
                     }
                 } else {
-//                    System.out.println("fdpfdpfdp2");
                     response.setContentFromString(
                             "<html><body><h1>ERROR: 405 Method Not Allowed</h1></body></html>",
                             "text/html");

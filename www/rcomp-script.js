@@ -88,12 +88,7 @@ function postMessage(wall) {
 function deleteMessage(){
 	/*hints.innerHTML="";*/
 	
-	if(numberBox.match(/^[0-9]+$/) != null){
-		messageNumber=numberBox;
-	}else{
-		/*hints.innerHTML="Number of the message must be a integer";*/
-        return;
-	}
+	messageNumber=numberBox.value;
 	
 	var DELETErequest = new XMLHttpRequest();
 	DELETErequest.open("DELETE", "/walls/"+wallName+"/"+messageNumber, true);
@@ -106,7 +101,7 @@ function deleteMessage(){
 
 function deleteWall(){
 	var DELETErequest = new XMLHttpRequest();
-	DELETErequest.open("DELETE", "/walls/"+wallBox.value+"/"+messageNumber, true);
+	DELETErequest.open("DELETE", "/walls/"+wallName, true);
 	/*nextMsg=nextMsg-1;*/
 	}
 	
