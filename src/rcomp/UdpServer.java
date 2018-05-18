@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author simao
  */
-public class UdpServer extends Thread {
+public class UdpServer implements Runnable {
 
     private final int PORT;
     private static final int BUFFER = 1024;
@@ -27,7 +27,7 @@ public class UdpServer extends Thread {
     }
 
     @Override
-    public void start() {
+    public void run() {
         try {
             DatagramSocket serverSocket = new DatagramSocket(PORT);
             byte[] receiveData = new byte[BUFFER];
@@ -36,10 +36,11 @@ public class UdpServer extends Thread {
                 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
                 serverSocket.receive(receivePacket);
                 String sentence = new String(receivePacket.getData());
+                System.out.println(sentence);
                 InetAddress ipAddress = receivePacket.getAddress();
                 int port = receivePacket.getPort();
                 String[] sentenceArray = sentence.split("/");
-                HttpServerChat.addMsg(sentenceArray[0], sentenceArray[1]);
+                HttpServerChat.addMsg(sentenceArray[0], sentenceArray[1].trim());
                 String toSend = "Message posted successfully!";
                 sendData = toSend.getBytes();
                 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, ipAddress, port);

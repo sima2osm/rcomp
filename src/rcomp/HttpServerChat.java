@@ -33,7 +33,8 @@ public class HttpServerChat {
         }
         
         udpServer = new UdpServer(PORT);
-        udpServer.start();
+        Thread t = new Thread(udpServer);
+        t.start();
         
         System.out.println("Server ready, listening on port number " + PORT);
         while (true) {

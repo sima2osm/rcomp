@@ -39,8 +39,9 @@ public class UdpClient {
                 byte[] sendData = new byte[BUFFER];
                 byte[] receiveData = new byte[BUFFER];
                 String sentence = "";
+                sentence += args[2] + "/";
                 for (int i = 3; i < args.length; i++) {
-                    sentence += args[i];
+                    sentence += args[i] + " ";
                 }
                 sendData = sentence.getBytes();
                 DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, ipAddress, port);
@@ -48,7 +49,7 @@ public class UdpClient {
                 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
                 clientSocket.receive(receivePacket);
                 String received = new String(receivePacket.getData());
-                System.out.println(received);
+                System.out.println(received.trim());
                 clientSocket.close();
             } catch (NumberFormatException ex) {
                 System.out.println("First argument isn't a valid port!");
