@@ -14,10 +14,13 @@ public class HttpServerChat {
     static private final String BASE_FOLDER = "www";
     static private ServerSocket sock;
     private static final int PORT = 32102;
-
+    
+    //UDP
+    static private UdpServer udpServer;
+    
     public static void main(String args[]) throws Exception {
         Socket cliSock;
-
+        
         if (args.length != 0) {
             System.out.println("Arguments number isn't 0.");
             System.exit(1);
@@ -28,6 +31,10 @@ public class HttpServerChat {
             System.out.println("Server failed to open local port " + PORT);
             System.exit(1);
         }
+        
+        udpServer = new UdpServer(PORT);
+        udpServer.start();
+        
         System.out.println("Server ready, listening on port number " + PORT);
         while (true) {
             cliSock = sock.accept();
