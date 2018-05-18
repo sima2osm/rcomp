@@ -11,32 +11,52 @@ import java.util.Map.Entry;
  */
 public class HttpServerChat {
 
-    static private final String BASE_FOLDER = "www";
+    static private String BASE_FOLDER;
     static private ServerSocket sock;
-    private static final int PORT = 32102;
-    
+    private static int PORT;
+
     //UDP
     static private UdpServer udpServer;
-    
+
     public static void main(String args[]) throws Exception {
-        Socket cliSock;
-        
-        if (args.length != 0) {
-            System.out.println("Arguments number isn't 0.");
+        if (args.length != 2) {
+            System.out.println("Arguments number isn't 2.");
             System.exit(1);
+        } else {
+            try {
+                PORT = Integer.parseInt(args[0]);
+                if (PORT < 0 || PORT > 65535) {
+                    throw new NumberFormatException();
+                }
+                BASE_FOLDER = args[1];
+                File f = new File(BASE_FOLDER);
+                if (f.exists() && f.isDirectory()) {
+                    run();
+                } else {
+                    System.out.println("Second argument isn't a valid directory!");
+                    System.exit(1);
+                }
+            } catch (NumberFormatException ex) {
+                System.out.println("First argument isn't a valid port!");
+                System.exit(1);
+            }
         }
+    }
+    
+    private static void run() throws IOException {
         try {
             sock = new ServerSocket(PORT);
         } catch (IOException ex) {
             System.out.println("Server failed to open local port " + PORT);
             System.exit(1);
         }
-        
+
         udpServer = new UdpServer(PORT);
         Thread t = new Thread(udpServer);
         t.start();
-        
+
         System.out.println("Server ready, listening on port number " + PORT);
+        Socket cliSock;
         while (true) {
             cliSock = sock.accept();
             HttpChatRequest req = new HttpChatRequest(cliSock, BASE_FOLDER);
